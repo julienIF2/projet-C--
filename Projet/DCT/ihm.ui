@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IHM</class>
+ <widget class="QMainWindow" name="IHM">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>881</width>
+    <height>573</height>
+   </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>IHM</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>181</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayoutTransf">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBoxTransf">
+       <property name="title">
+        <string>Transform</string>
+       </property>
+       <widget class="QRadioButton" name="radioButtonDCT">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>40</y>
+          <width>95</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>DCT</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QRadioButton" name="radioButtonIDCT">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>95</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>IDCT</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>181</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayoutTime">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBoxTime">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="title">
+        <string>Time</string>
+       </property>
+       <widget class="QTimeEdit" name="timeEditStart">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>60</y>
+          <width>118</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="currentSection">
+         <enum>QDateTimeEdit::MinuteSection</enum>
+        </property>
+        <property name="displayFormat">
+         <string>mm:ss:zzz</string>
+        </property>
+       </widget>
+       <widget class="QTimeEdit" name="timeEditStop">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>130</y>
+          <width>118</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="displayFormat">
+         <string>mm:ss:zzz</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelStartTime">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>121</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Start Time :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelStopTime">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>100</y>
+          <width>121</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Stop Time :</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>160</y>
+          <width>131</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>(Format : M:s:ms)</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>369</y>
+      <width>181</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayoutAction">
+     <item>
+      <widget class="QPushButton" name="pushButtonStart">
+       <property name="text">
+        <string>Start</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonClear">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Clear</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonFocus">
+       <property name="text">
+        <string>Focus</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QScrollBar" name="horizontalScrollBar">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>500</y>
+      <width>511</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QCustomPlot" name="graphCurve" native="true">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>10</y>
+      <width>511</width>
+      <height>231</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCustomPlot" name="graphTransf" native="true">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>250</y>
+      <width>511</width>
+      <height>231</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>10</y>
+      <width>151</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayoutInput">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBoxInput">
+       <property name="title">
+        <string>Input</string>
+       </property>
+       <widget class="QLabel" name="labelIn">
+        <property name="geometry">
+         <rect>
+          <x>14</x>
+          <y>15</y>
+          <width>131</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>720</x>
+      <y>250</y>
+      <width>151</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayoutOuput">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBoxOutput">
+       <property name="title">
+        <string>Output</string>
+       </property>
+       <widget class="QLabel" name="labelOut">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>131</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="labelVersion">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>490</y>
+      <width>141</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Version</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>881</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuOpen">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>Open</string>
+     </property>
+     <widget class="QMenu" name="menuFichier">
+      <property name="title">
+       <string>Fichier</string>
+      </property>
+      <addaction name="actionWave"/>
+      <addaction name="actionTexte"/>
+     </widget>
+     <addaction name="menuFichier"/>
+    </widget>
+    <addaction name="menuOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionFermer"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="title">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelpMe"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionFermer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionWave">
+   <property name="text">
+    <string>Wave</string>
+   </property>
+  </action>
+  <action name="actionTexte">
+   <property name="text">
+    <string>Texte</string>
+   </property>
+  </action>
+  <action name="actionHelpMe">
+   <property name="text">
+    <string>Help me</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
