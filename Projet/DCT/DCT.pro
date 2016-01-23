@@ -16,10 +16,21 @@ TEMPLATE = app
 SOURCES += main.cpp\
         ihm.cpp \
     qcustomplot.cpp \
-    transform.cpp
+    transform.cpp \
+    signaux.cpp \
+    signalcsv.cpp \
+    signaltxt.cpp \
+    signalwav.cpp
 
 HEADERS  += ihm.h \
     qcustomplot.h \
-    transform.h
+    transform.h \
+    signaux.h \
+    signalcsv.h \
+    signaltxt.h \
+    signalwav.h
 
 FORMS    += ihm.ui
+
+QMAKE_CXXFLAGS+= -fopenmp
+QMAKE_LFLAGS +=  -fopenmp

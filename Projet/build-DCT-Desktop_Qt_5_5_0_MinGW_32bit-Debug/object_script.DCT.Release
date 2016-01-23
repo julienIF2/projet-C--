@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\ihm.o
+./release\qcustomplot.o
+./release\transform.o
+./release\signaux.o
+./release\signalcsv.o
+./release\signaltxt.o
+./release\signalwav.o
+./release\moc_ihm.o
+./release\moc_qcustomplot.o
+);

@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\ihm.o
+./debug\qcustomplot.o
+./debug\transform.o
+./debug\signaux.o
+./debug\signalcsv.o
+./debug\signaltxt.o
+./debug\signalwav.o
+./debug\moc_ihm.o
+./debug\moc_qcustomplot.o
+);
