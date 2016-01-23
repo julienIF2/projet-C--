@@ -15,21 +15,6 @@ double Signaux::GetDuration()
     return fileDuration;
 }
 
-void Signaux::GetData(QVector<double>& dataX,QVector<double>& dataY)
-{
-    dataX = dataInX;
-    dataY = dataInY;
-}
-
-
-void Signaux::SetData(const QVector<double>& dataX,const  QVector<double>& dataY)
-{
-    dataInX.clear();
-    dataInY.clear();
-
-    dataInX = dataX;
-    dataInY = dataY;
-}
 
 void Signaux::SetTime(const QTime start,const QTime stop)
 {
@@ -38,6 +23,11 @@ void Signaux::SetTime(const QTime start,const QTime stop)
 }
 
 void Signaux::SaveData(const QString name,const QVector<double> &dataX,const QVector<double> &dataY)
+{
+
+}
+
+void Signaux::ReadData(QString name,QVector<double>& dataX,QVector<double>& dataY)
 {
 
 }

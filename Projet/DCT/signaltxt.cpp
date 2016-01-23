@@ -11,7 +11,7 @@ void signalTXT::ReadInfo(QString name)
 }
 
 
-void signalTXT::ReadData(QString name)
+void signalTXT::ReadData(QString name,QVector<double>& dataX,QVector<double>& dataY)
 {
     QFile file(name);
 
@@ -22,9 +22,12 @@ void signalTXT::ReadData(QString name)
     else
     {
        QTextStream in(&file);
-       QVector<double> dataX,dataY;
        QString temp;
        QStringList tempList;
+
+       dataX.clear();
+       dataY.clear();
+
        while (!in.atEnd())
        {
            temp = in.readLine();
@@ -32,11 +35,6 @@ void signalTXT::ReadData(QString name)
            dataX.push_back(QString(tempList[0]).toDouble());
            dataY.push_back(QString(tempList[1]).toDouble());
        }
-
-       SetData(dataX,dataY);
-
-       dataX.clear();
-       dataY.clear();
 
        file.close();
     }

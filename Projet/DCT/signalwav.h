@@ -44,7 +44,7 @@ public:
     signalWAV();
 
     void ReadInfo(QString name);
-    void ReadData(QString name);
+    void ReadData(QString name,QVector<double>& dataX,QVector<double>& dataY);
     void SaveData(const QString name,const QVector<double>& dataX,const  QVector<double>& dataY);
 
 };

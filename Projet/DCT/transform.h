@@ -4,36 +4,28 @@
 #include <Qvector>
 #include <math.h>
 #include <omp.h>
+#include <QObject>
+
+#include <QCoreApplication>
 
 using namespace std;
 
 // TODO
 // utiliser open mp pour accélérer les calcules...
 
-class Transform
+class Transform : public QObject
 {
-    QVector<double> dataInX;
-    QVector<double> dataInY;
-    QVector<double> dataOutX;
-    QVector<double> dataOutY;
-    int nbPoints;
-    int fe;
+    Q_OBJECT
 
 public:
     Transform();
     ~Transform();
 
-    void startDCT(void);
-    void startIDCT(void);
+    void dctTransform(const QVector<double> &Xin,const QVector<double> &Yin,QVector<double> &Xout,QVector<double> &Yout);
+    void idctTransform(const QVector<double> &Xin,const QVector<double> &Yin,QVector<double> &Xout,QVector<double> &Yout);
 
-    void GetData(QVector<double>& dataX,QVector<double>& dataY);
-    void SetData(const QVector<double>& dataX,const  QVector<double>& dataY);
-
-private :
-    void dctTransform(void);
-    void idctTransform(void);
-
-
+signals:
+    void progressionSignal(int pourcent);
 
 };
 

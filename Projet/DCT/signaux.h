@@ -12,8 +12,6 @@ class Signaux
 private :
     double fileSize;
     double fileDuration;
-    QVector<double> dataInX;
-    QVector<double> dataInY;
     QTime startTime;
     QTime stopTime;
 
@@ -23,12 +21,10 @@ public:
     double GetSize();
     double GetDuration();
 
-    void GetData(QVector<double>& dataX,QVector<double>& dataY);
-    void SetData(const QVector<double>& dataX,const  QVector<double>& dataY);
-
     void SetTime(const QTime start,const QTime stop);
 
     virtual void SaveData(const QString name,const QVector<double> &dataX,const QVector<double> &dataY);
+    virtual void ReadData(QString name,QVector<double>& dataX,QVector<double>& dataY);
 
 };
 

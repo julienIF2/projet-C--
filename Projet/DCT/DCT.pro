@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     signaux.cpp \
     signalcsv.cpp \
     signaltxt.cpp \
-    signalwav.cpp
+    signalwav.cpp \
+    dialog.cpp
 
 HEADERS  += ihm.h \
     qcustomplot.h \
@@ -28,9 +29,11 @@ HEADERS  += ihm.h \
     signaux.h \
     signalcsv.h \
     signaltxt.h \
-    signalwav.h
+    signalwav.h \
+    dialog.h
 
-FORMS    += ihm.ui
+FORMS    += ihm.ui \
+    dialog.ui
 
 QMAKE_CXXFLAGS+= -fopenmp
 QMAKE_LFLAGS +=  -fopenmp

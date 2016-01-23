@@ -20,9 +20,9 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
-#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTimeEdit>
 #include <QtWidgets/QVBoxLayout>
@@ -41,6 +41,8 @@ public:
     QAction *actionTexte;
     QAction *actionHelpMe;
     QAction *actionAbout;
+    QAction *actionCSV;
+    QAction *actionOpen;
     QWidget *centralWidget;
     QWidget *gridLayoutWidget;
     QGridLayout *gridLayoutTransf;
@@ -60,7 +62,6 @@ public:
     QPushButton *pushButtonStart;
     QPushButton *pushButtonClear;
     QPushButton *pushButtonFocus;
-    QScrollBar *horizontalScrollBar;
     QCustomPlot *graphCurve;
     QCustomPlot *graphTransf;
     QWidget *gridLayoutWidget_3;
@@ -72,10 +73,9 @@ public:
     QGroupBox *groupBoxOutput;
     QLabel *labelOut;
     QLabel *labelVersion;
+    QProgressBar *progressBar;
     QMenuBar *menuBar;
     QMenu *menuFile;
-    QMenu *menuOpen;
-    QMenu *menuFichier;
     QMenu *menuEdit;
     QMenu *menuHelp;
     QStatusBar *statusBar;
@@ -88,7 +88,7 @@ public:
         IHM->setAcceptDrops(false);
         actionSave = new QAction(IHM);
         actionSave->setObjectName(QStringLiteral("actionSave"));
-        actionSave->setEnabled(false);
+        actionSave->setEnabled(true);
         actionFermer = new QAction(IHM);
         actionFermer->setObjectName(QStringLiteral("actionFermer"));
         actionFermer->setEnabled(false);
@@ -103,6 +103,10 @@ public:
         actionHelpMe->setObjectName(QStringLiteral("actionHelpMe"));
         actionAbout = new QAction(IHM);
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
+        actionCSV = new QAction(IHM);
+        actionCSV->setObjectName(QStringLiteral("actionCSV"));
+        actionOpen = new QAction(IHM);
+        actionOpen->setObjectName(QStringLiteral("actionOpen"));
         centralWidget = new QWidget(IHM);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayoutWidget = new QWidget(centralWidget);
@@ -179,11 +183,6 @@ public:
 
         verticalLayoutAction->addWidget(pushButtonFocus);
 
-        horizontalScrollBar = new QScrollBar(centralWidget);
-        horizontalScrollBar->setObjectName(QStringLiteral("horizontalScrollBar"));
-        horizontalScrollBar->setEnabled(false);
-        horizontalScrollBar->setGeometry(QRect(200, 500, 511, 21));
-        horizontalScrollBar->setOrientation(Qt::Horizontal);
         graphCurve = new QCustomPlot(centralWidget);
         graphCurve->setObjectName(QStringLiteral("graphCurve"));
         graphCurve->setGeometry(QRect(200, 10, 511, 231));
@@ -225,17 +224,16 @@ public:
         labelVersion = new QLabel(centralWidget);
         labelVersion->setObjectName(QStringLiteral("labelVersion"));
         labelVersion->setGeometry(QRect(730, 490, 141, 21));
+        progressBar = new QProgressBar(centralWidget);
+        progressBar->setObjectName(QStringLiteral("progressBar"));
+        progressBar->setGeometry(QRect(200, 490, 511, 23));
+        progressBar->setValue(24);
         IHM->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(IHM);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 881, 26));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
-        menuOpen = new QMenu(menuFile);
-        menuOpen->setObjectName(QStringLiteral("menuOpen"));
-        menuOpen->setEnabled(true);
-        menuFichier = new QMenu(menuOpen);
-        menuFichier->setObjectName(QStringLiteral("menuFichier"));
         menuEdit = new QMenu(menuBar);
         menuEdit->setObjectName(QStringLiteral("menuEdit"));
         menuEdit->setEnabled(false);
@@ -250,14 +248,10 @@ public:
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuEdit->menuAction());
         menuBar->addAction(menuHelp->menuAction());
-        menuFile->addAction(menuOpen->menuAction());
+        menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
-        menuFile->addAction(actionFermer);
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
-        menuOpen->addAction(menuFichier->menuAction());
-        menuFichier->addAction(actionWave);
-        menuFichier->addAction(actionTexte);
         menuHelp->addAction(actionHelpMe);
         menuHelp->addAction(actionAbout);
 
@@ -276,6 +270,8 @@ public:
         actionTexte->setText(QApplication::translate("IHM", "Texte", 0));
         actionHelpMe->setText(QApplication::translate("IHM", "Help me", 0));
         actionAbout->setText(QApplication::translate("IHM", "About", 0));
+        actionCSV->setText(QApplication::translate("IHM", "CSV", 0));
+        actionOpen->setText(QApplication::translate("IHM", "Open", 0));
         groupBoxTransf->setTitle(QApplication::translate("IHM", "Transform", 0));
         radioButtonDCT->setText(QApplication::translate("IHM", "DCT", 0));
         radioButtonIDCT->setText(QApplication::translate("IHM", "IDCT", 0));
@@ -294,8 +290,6 @@ public:
         labelOut->setText(QApplication::translate("IHM", "TextLabel", 0));
         labelVersion->setText(QApplication::translate("IHM", "Version", 0));
         menuFile->setTitle(QApplication::translate("IHM", "File", 0));
-        menuOpen->setTitle(QApplication::translate("IHM", "Open", 0));
-        menuFichier->setTitle(QApplication::translate("IHM", "Fichier", 0));
         menuEdit->setTitle(QApplication::translate("IHM", "Edit", 0));
         menuHelp->setTitle(QApplication::translate("IHM", "Help", 0));
     } // retranslateUi

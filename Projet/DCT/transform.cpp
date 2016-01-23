@@ -3,126 +3,121 @@
 
 Transform::Transform()
 {
-
+    connect(this,SIGNAL(progressionSignal(int)),this,SLOT(progressionSlot(int)));
 }
 
 Transform::~Transform()
 {
-    dataInX.clear();
-    dataInY.clear();
-    dataOutY.clear();
-    dataOutX.clear();
+
 }
 
-void Transform::dctTransform(void)
+void Transform::dctTransform(const QVector<double> &Xin,const QVector<double> &Yin,QVector<double> &Xout,QVector<double> &Yout)
 {
    double somme;
    double k,j,N;
    double w;
    double Fe;
+   double state=0,deltaProgression;
 
    /* Récupération de la taille du signal d'entrée */
-   N = dataInX.size();
-   /* Remise à l'état initial des vecteurs */
-   dataOutY.clear();
-   dataOutX.clear();
-
-   /* Calcul des valeurs de l'axe X */
-   Fe = 1/(dataInX[1]-dataInX[0]);
-   for(k=0;k<N;k++)
+   N = Xin.size();
+   deltaProgression = 0.001*N;
+   if(N != 0)
    {
-       dataOutX.push_back(Fe/2*k/N);
-   }
 
-   for(k=0;k<N;k++)
-   {
-       /* Calcul de la somme des N valeur */
-       somme = 0;
-       for(j=0;j<N;j++)
+       /* Remise à l'état initial des vecteurs */
+       Xout.clear();
+       Yout.clear();
+
+       /* Calcul des valeurs de l'axe X */
+       Fe = 1/(Xin[1]-Xin[0]);
+       for(k=0;k<N;k++)
        {
-           somme += dataInY[j]*cos(M_PI/(2*N)*(2*j)*k);
+           Xout.push_back(Fe/2*k/N);
        }
-       /* Calcul du facteur w */
-       if(k==1)
+
+       for(k=0;k<N;k++)
        {
-           w = 1/sqrt(N);
+           QCoreApplication::processEvents();
+           if(k > (state+deltaProgression) )
+           {
+               emit progressionSignal((int)k);
+               state = k;
+           }
+
+           /* Calcul de la somme des N valeur */
+           somme = 0;
+           for(j=0;j<N;j++)
+           {
+               somme += Yin[j]*cos(M_PI/(2*N)*(2*j)*k);
+           }
+           /* Calcul du facteur w */
+           if(k==1)
+           {
+               w = 1/sqrt(N);
+           }
+           else
+           {
+               w = sqrt(2/N);
+           }
+           /* Remplissage du vecteur contenant la DCT */
+           Yout.push_back(w*somme);
        }
-       else
-       {
-           w = sqrt(2/N);
-       }
-       /* Remplissage du vecteur contenant la DCT */
-       dataOutY.push_back(w*somme);
    }
+   emit progressionSignal(100);
 }
 
-void Transform::idctTransform(void)
+void Transform::idctTransform(const QVector<double> &Xin,const QVector<double> &Yin,QVector<double> &Xout,QVector<double> &Yout)
 {
     double somme;
     double m,k,M,w;
     double deltaT;
+    double state=0,deltaProgression;
 
     /* Récupération de la taille du signal d'entrée */
-    M = dataInY.size();
-
-    /* Remise à l'état initial des vecteurs */
-    dataOutY.clear();
-    dataOutX.clear();
-
-    /* Calcul des valeurs de l'axe X */
-    deltaT = 1/(dataInX[1]-dataInX[0]);
-    for(k=0;k<M;k++)
+    M = Xin.size();
+    deltaProgression = 0.001*M;
+    if(M != 0)
     {
-        dataOutX.push_back(deltaT*k/M);
-    }
+        /* Remise à l'état initial des vecteurs */
+        Xout.clear();
+        Yout.clear();
 
-    for(m=0;m<M;m++)
-    {
-        somme = 0;
+        /* Calcul des valeurs de l'axe X */
+        deltaT = 1/(Xin[1]-Xin[0]);
         for(k=0;k<M;k++)
         {
-            /* Calcul du facteur w */
-            if(k==1)
-            {
-                w = 1/sqrt(M);
-            }
-            else
-            {
-                w = sqrt(2/M);
-            }
-
-            somme = somme + w*dataInY[k]*cos(M_PI*(2*m-1)*(k)/(2*M+1));
+            Xout.push_back(deltaT*k/M);
         }
-        /* Remplissage du vecteur contenant la IDCT */
-        dataOutY.push_back(somme);
+
+        for(m=0;m<M;m++)
+        {
+            QCoreApplication::processEvents();
+            if(m > (state+deltaProgression) )
+            {
+                emit progressionSignal((int)m);
+                state = m;
+            }
+
+
+            somme = 0;
+            for(k=0;k<M;k++)
+            {
+                /* Calcul du facteur w */
+                if(k==1)
+                {
+                    w = 1/sqrt(M);
+                }
+                else
+                {
+                    w = sqrt(2/M);
+                }
+
+                somme = somme + w*Yin[k]*cos(M_PI*(2*m-1)*(k)/(2*M+1));
+            }
+            /* Remplissage du vecteur contenant la IDCT */
+            Yout.push_back(somme);
+        }
     }
-}
-
-void Transform::startDCT(void)
-{
-    // TODO vérifier les data avant de lancer l'opération
-
-    this->dctTransform();
-}
-
-void Transform::startIDCT(void)
-{
-    // TODO vérifier les data avant de lancer l'opération
-
-    this->idctTransform();
-}
-
-void Transform::SetData(const QVector<double>& dataX,const  QVector<double>& dataY)
-{
-    dataInX.clear();
-    dataInY.clear();
-
-    dataInX = dataX;
-    dataInY = dataY;
-}
-
-void Transform::GetData(QVector<double>& dataX,QVector<double>& dataY)
-{
-    dataX = dataOutX;
-    dataY = dataOutY;
+    emit progressionSignal(100);
 }

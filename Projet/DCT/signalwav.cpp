@@ -12,7 +12,7 @@ void signalWAV::ReadInfo(QString name)
 }
 
 
-void signalWAV::ReadData(QString name)
+void signalWAV::ReadData(QString name,QVector<double>& dataX,QVector<double>& dataY)
 {
     const int BUFFER_SIZE  = 256;
     int numOfByte = 0;
@@ -27,7 +27,9 @@ void signalWAV::ReadData(QString name)
     }
     else
     {
-        QVector<double> dataX,dataY;
+        dataX.clear();
+        dataY.clear();
+
         fread(meta, 1, sizeof(header), infile);
 
         qDebug() << "first chunk is :" << sizeof(meta->chunk_id) << " bytes in size" << endl;
@@ -51,11 +53,6 @@ void signalWAV::ReadData(QString name)
                 numOfByte++;
             }
         }
-
-        SetData(dataX,dataY);
-
-        dataX.clear();
-        dataY.clear();
 
         fclose(infile);
     }

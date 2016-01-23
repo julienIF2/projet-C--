@@ -9,6 +9,7 @@
 #include "signalcsv.h"
 #include "signalwav.h"
 #include "signaltxt.h"
+#include "dialog.h"
 
 using namespace std;
 
@@ -27,17 +28,36 @@ public:
 private:
     Ui::IHM *ui;
 
+private :
+    QVector<double> dataInX;
+    QVector<double> dataInY;
+    QVector<double> dataOutX;
+    QVector<double> dataOutY;
+
     Transform DataCalc;
-    signalWAV DataSignal;
+    Signaux *pDataSignal;
+    Dialog msgBox;
 
     void updateGraph(void);
+    void openDialogBox(QString title,QString txt);
 
-public slots:
+    void updateInSection(QString file,QString type,int duration,int size);
+    void updateOutSection(QString transformName,int time);
+
+    void enableAllCmd(void);
+    void disableAllCmd(void);
+
+private slots:
     void startClick(void);
     void clearClick(void);
     void focusClick(void);
 
+    void openFileClick(void);
+    void saveFileClick(void);
 
+    void aboutClick(void);
+
+    void updateProgressBar(int value);
 };
 
 #endif // IHM_H

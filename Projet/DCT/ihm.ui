@@ -191,22 +191,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QScrollBar" name="horizontalScrollBar">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>500</y>
-      <width>511</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
    <widget class="QCustomPlot" name="graphCurve" native="true">
     <property name="geometry">
      <rect>
@@ -304,6 +288,19 @@
      <string>Version</string>
     </property>
    </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>490</y>
+      <width>511</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -318,25 +315,8 @@
     <property name="title">
      <string>File</string>
     </property>
-    <widget class="QMenu" name="menuOpen">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="title">
-      <string>Open</string>
-     </property>
-     <widget class="QMenu" name="menuFichier">
-      <property name="title">
-       <string>Fichier</string>
-      </property>
-      <addaction name="actionWave"/>
-      <addaction name="actionTexte"/>
-     </widget>
-     <addaction name="menuFichier"/>
-    </widget>
-    <addaction name="menuOpen"/>
+    <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
-    <addaction name="actionFermer"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -365,7 +345,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSave">
    <property name="enabled">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Save</string>
@@ -405,6 +385,16 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionCSV">
+   <property name="text">
+    <string>CSV</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
    </property>
   </action>
  </widget>
