@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
@@ -57,6 +58,8 @@ public:
     QLabel *labelStartTime;
     QLabel *labelStopTime;
     QLabel *label;
+    QCheckBox *enableTime;
+    QPushButton *pushButtonWindowing;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *verticalLayoutAction;
     QPushButton *pushButtonStart;
@@ -142,20 +145,27 @@ public:
         groupBoxTime->setEnabled(true);
         timeEditStart = new QTimeEdit(groupBoxTime);
         timeEditStart->setObjectName(QStringLiteral("timeEditStart"));
-        timeEditStart->setGeometry(QRect(30, 60, 118, 22));
+        timeEditStart->setGeometry(QRect(60, 60, 101, 22));
         timeEditStart->setCurrentSection(QDateTimeEdit::MinuteSection);
         timeEditStop = new QTimeEdit(groupBoxTime);
         timeEditStop->setObjectName(QStringLiteral("timeEditStop"));
-        timeEditStop->setGeometry(QRect(30, 130, 118, 22));
+        timeEditStop->setGeometry(QRect(60, 100, 101, 22));
         labelStartTime = new QLabel(groupBoxTime);
         labelStartTime->setObjectName(QStringLiteral("labelStartTime"));
-        labelStartTime->setGeometry(QRect(20, 30, 121, 16));
+        labelStartTime->setGeometry(QRect(10, 60, 41, 16));
         labelStopTime = new QLabel(groupBoxTime);
         labelStopTime->setObjectName(QStringLiteral("labelStopTime"));
-        labelStopTime->setGeometry(QRect(20, 100, 121, 16));
+        labelStopTime->setGeometry(QRect(10, 100, 41, 20));
         label = new QLabel(groupBoxTime);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(20, 160, 131, 16));
+        label->setGeometry(QRect(20, 130, 131, 16));
+        enableTime = new QCheckBox(groupBoxTime);
+        enableTime->setObjectName(QStringLiteral("enableTime"));
+        enableTime->setEnabled(true);
+        enableTime->setGeometry(QRect(20, 30, 81, 20));
+        pushButtonWindowing = new QPushButton(groupBoxTime);
+        pushButtonWindowing->setObjectName(QStringLiteral("pushButtonWindowing"));
+        pushButtonWindowing->setGeometry(QRect(0, 160, 179, 28));
 
         gridLayoutTime->addWidget(groupBoxTime, 0, 0, 1, 1);
 
@@ -278,16 +288,18 @@ public:
         groupBoxTime->setTitle(QApplication::translate("IHM", "Time", 0));
         timeEditStart->setDisplayFormat(QApplication::translate("IHM", "mm:ss:zzz", 0));
         timeEditStop->setDisplayFormat(QApplication::translate("IHM", "mm:ss:zzz", 0));
-        labelStartTime->setText(QApplication::translate("IHM", "Start Time :", 0));
-        labelStopTime->setText(QApplication::translate("IHM", "Stop Time :", 0));
+        labelStartTime->setText(QApplication::translate("IHM", "Start :", 0));
+        labelStopTime->setText(QApplication::translate("IHM", "Stop :", 0));
         label->setText(QApplication::translate("IHM", "(Format : M:s:ms)", 0));
+        enableTime->setText(QApplication::translate("IHM", "Enable", 0));
+        pushButtonWindowing->setText(QApplication::translate("IHM", "Windowing", 0));
         pushButtonStart->setText(QApplication::translate("IHM", "Start", 0));
         pushButtonClear->setText(QApplication::translate("IHM", "Clear", 0));
         pushButtonFocus->setText(QApplication::translate("IHM", "Focus", 0));
         groupBoxInput->setTitle(QApplication::translate("IHM", "Input", 0));
-        labelIn->setText(QApplication::translate("IHM", "TextLabel", 0));
+        labelIn->setText(QString());
         groupBoxOutput->setTitle(QApplication::translate("IHM", "Output", 0));
-        labelOut->setText(QApplication::translate("IHM", "TextLabel", 0));
+        labelOut->setText(QString());
         labelVersion->setText(QApplication::translate("IHM", "Version", 0));
         menuFile->setTitle(QApplication::translate("IHM", "File", 0));
         menuEdit->setTitle(QApplication::translate("IHM", "Edit", 0));

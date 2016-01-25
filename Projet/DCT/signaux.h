@@ -9,22 +9,22 @@ using namespace std;
 
 class Signaux
 {
-private :
-    double fileSize;
-    double fileDuration;
-    QTime startTime;
-    QTime stopTime;
+public :
+    struct fileInfoStruct
+    {
+        QString fileName;
+        QString fileType;
+        long fileSize;
+        long fileDuration;
+    };
+    typedef struct fileInfoStruct fileInfoStruct;
 
-public:
     Signaux();
 
-    double GetSize();
-    double GetDuration();
-
-    void SetTime(const QTime start,const QTime stop);
-
-    virtual void SaveData(const QString name,const QVector<double> &dataX,const QVector<double> &dataY);
-    virtual void ReadData(QString name,QVector<double>& dataX,QVector<double>& dataY);
+    // TODO => abstract
+    virtual void ReadInfo(const QString name,fileInfoStruct *pFileInfo) = 0;
+    virtual void SaveData(const QString name,const QVector<double> &dataX,const QVector<double> &dataY) = 0;
+    virtual void ReadData(QString name,QVector<double>& dataX,QVector<double>& dataY) = 0;
 
 };
 

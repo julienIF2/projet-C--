@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QVector>
 #include <QDebug>
+#include <fstream>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ private:
 public:
     signalCSV();
 
-    void ReadInfo(QString name);
+    void ReadInfo(const QString name,Signaux::fileInfoStruct *pFileInfo);
     void ReadData(QString name,QVector<double>& dataX,QVector<double>& dataY);
     void SaveData(const QString name,const QVector<double>& dataX,const QVector<double>& dataY);
 

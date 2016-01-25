@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <qcustomplot.h>
 
+#include <QTime>
+
 #include "transform.h"
 #include "signaux.h"
 #include "signalcsv.h"
@@ -41,7 +43,7 @@ private :
     void updateGraph(void);
     void openDialogBox(QString title,QString txt);
 
-    void updateInSection(QString file,QString type,int duration,int size);
+    void updateInSection(QString fileName,QString type,long duration,long size);
     void updateOutSection(QString transformName,int time);
 
     void enableAllCmd(void);
@@ -51,9 +53,12 @@ private slots:
     void startClick(void);
     void clearClick(void);
     void focusClick(void);
+    void toogleBoxTime(void);
 
     void openFileClick(void);
     void saveFileClick(void);
+
+    void timeWindow(void);
 
     void aboutClick(void);
 

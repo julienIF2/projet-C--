@@ -5,9 +5,23 @@ signalTXT::signalTXT()
 
 }
 
-void signalTXT::ReadInfo(QString name)
+void signalTXT::ReadInfo(const QString name,Signaux::fileInfoStruct *pFileInfo)
 {
+    string type;
 
+    type = name.toStdString().substr(name.indexOf("."));
+
+    pFileInfo->fileName = QString::fromStdString(name.toStdString().substr(name.lastIndexOf("/")+1));
+    pFileInfo->fileType = QString::fromStdString(type);
+    pFileInfo->fileDuration =0; // durée inconnue
+
+    ifstream file;
+    file.open(name.toUtf8().constData());
+    long pos = file.tellg();
+    file.seekg( 0 , std::ios_base::end ); // on se place à la fin du fichier
+    pFileInfo->fileSize =file.tellg(); // la position fin = taille en octects
+    file.seekg( pos,  std::ios_base::beg ) ;
+    file.close();
 }
 
 

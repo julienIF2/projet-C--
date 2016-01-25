@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_IHM_t {
-    QByteArrayData data[10];
-    char stringdata0[101];
+    QByteArrayData data[12];
+    char stringdata0[126];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,16 +34,19 @@ QT_MOC_LITERAL(1, 4, 10), // "startClick"
 QT_MOC_LITERAL(2, 15, 0), // ""
 QT_MOC_LITERAL(3, 16, 10), // "clearClick"
 QT_MOC_LITERAL(4, 27, 10), // "focusClick"
-QT_MOC_LITERAL(5, 38, 13), // "openFileClick"
-QT_MOC_LITERAL(6, 52, 13), // "saveFileClick"
-QT_MOC_LITERAL(7, 66, 10), // "aboutClick"
-QT_MOC_LITERAL(8, 77, 17), // "updateProgressBar"
-QT_MOC_LITERAL(9, 95, 5) // "value"
+QT_MOC_LITERAL(5, 38, 13), // "toogleBoxTime"
+QT_MOC_LITERAL(6, 52, 13), // "openFileClick"
+QT_MOC_LITERAL(7, 66, 13), // "saveFileClick"
+QT_MOC_LITERAL(8, 80, 10), // "timeWindow"
+QT_MOC_LITERAL(9, 91, 10), // "aboutClick"
+QT_MOC_LITERAL(10, 102, 17), // "updateProgressBar"
+QT_MOC_LITERAL(11, 120, 5) // "value"
 
     },
     "IHM\0startClick\0\0clearClick\0focusClick\0"
-    "openFileClick\0saveFileClick\0aboutClick\0"
-    "updateProgressBar\0value"
+    "toogleBoxTime\0openFileClick\0saveFileClick\0"
+    "timeWindow\0aboutClick\0updateProgressBar\0"
+    "value"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,7 +56,7 @@ static const uint qt_meta_data_IHM[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       9,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,13 +64,15 @@ static const uint qt_meta_data_IHM[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08 /* Private */,
-       3,    0,   50,    2, 0x08 /* Private */,
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    0,   52,    2, 0x08 /* Private */,
-       6,    0,   53,    2, 0x08 /* Private */,
-       7,    0,   54,    2, 0x08 /* Private */,
-       8,    1,   55,    2, 0x08 /* Private */,
+       1,    0,   59,    2, 0x08 /* Private */,
+       3,    0,   60,    2, 0x08 /* Private */,
+       4,    0,   61,    2, 0x08 /* Private */,
+       5,    0,   62,    2, 0x08 /* Private */,
+       6,    0,   63,    2, 0x08 /* Private */,
+       7,    0,   64,    2, 0x08 /* Private */,
+       8,    0,   65,    2, 0x08 /* Private */,
+       9,    0,   66,    2, 0x08 /* Private */,
+      10,    1,   67,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -76,7 +81,9 @@ static const uint qt_meta_data_IHM[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   11,
 
        0        // eod
 };
@@ -90,10 +97,12 @@ void IHM::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **
         case 0: _t->startClick(); break;
         case 1: _t->clearClick(); break;
         case 2: _t->focusClick(); break;
-        case 3: _t->openFileClick(); break;
-        case 4: _t->saveFileClick(); break;
-        case 5: _t->aboutClick(); break;
-        case 6: _t->updateProgressBar((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->toogleBoxTime(); break;
+        case 4: _t->openFileClick(); break;
+        case 5: _t->saveFileClick(); break;
+        case 6: _t->timeWindow(); break;
+        case 7: _t->aboutClick(); break;
+        case 8: _t->updateProgressBar((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -124,13 +133,13 @@ int IHM::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 9)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 9;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 9)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 9;
     }
     return _id;
 }

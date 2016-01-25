@@ -2803,7 +2803,22 @@ debug/ihm.o: ../DCT/ihm.cpp ../DCT/ihm.h \
 		../DCT/signaltxt.h \
 		../DCT/dialog.h \
 		H:/Qt/5.5/mingw492_32/include/QtWidgets/QDialog \
-		ui_ihm.h
+		ui_ihm.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QAction \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QApplication \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QButtonGroup \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QGridLayout \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QGroupBox \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QHeaderView \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QLabel \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QMenu \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QMenuBar \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QProgressBar \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QPushButton \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QRadioButton \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QStatusBar \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QTimeEdit \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\ihm.o ..\DCT\ihm.cpp
 
 debug/qcustomplot.o: ../DCT/qcustomplot.cpp ../DCT/qcustomplot.h \
@@ -3749,7 +3764,43 @@ debug/dialog.o: ../DCT/dialog.cpp H:/Qt/5.5/mingw492_32/include/QtGui/QIcon \
 		H:/Qt/5.5/mingw492_32/include/QtGui/qvector2d.h \
 		H:/Qt/5.5/mingw492_32/include/QtGui/qtouchdevice.h \
 		H:/Qt/5.5/mingw492_32/include/QtCore/QString \
-		ui_dialog.h
+		ui_dialog.h \
+		H:/Qt/5.5/mingw492_32/include/QtCore/QVariant \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QAction \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qaction.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qactiongroup.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QApplication \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qapplication.h \
+		H:/Qt/5.5/mingw492_32/include/QtCore/qcoreapplication.h \
+		H:/Qt/5.5/mingw492_32/include/QtCore/qeventloop.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qdesktopwidget.h \
+		H:/Qt/5.5/mingw492_32/include/QtGui/qguiapplication.h \
+		H:/Qt/5.5/mingw492_32/include/QtGui/qinputmethod.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QButtonGroup \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qbuttongroup.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QHeaderView \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qheaderview.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qabstractitemview.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qabstractscrollarea.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qframe.h \
+		H:/Qt/5.5/mingw492_32/include/QtCore/qabstractitemmodel.h \
+		H:/Qt/5.5/mingw492_32/include/QtCore/qitemselectionmodel.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qabstractitemdelegate.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qstyleoption.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qabstractspinbox.h \
+		H:/Qt/5.5/mingw492_32/include/QtGui/qvalidator.h \
+		H:/Qt/5.5/mingw492_32/include/QtCore/qregularexpression.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qslider.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qabstractslider.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qstyle.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qtabbar.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qtabwidget.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qrubberband.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QLabel \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qlabel.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/QPushButton \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qpushbutton.h \
+		H:/Qt/5.5/mingw492_32/include/QtWidgets/qabstractbutton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\dialog.o ..\DCT\dialog.cpp
 
 debug/moc_ihm.o: debug/moc_ihm.cpp 

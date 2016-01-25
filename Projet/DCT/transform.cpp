@@ -3,7 +3,6 @@
 
 Transform::Transform()
 {
-    connect(this,SIGNAL(progressionSignal(int)),this,SLOT(progressionSlot(int)));
 }
 
 Transform::~Transform()
