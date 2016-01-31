@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>881</width>
-    <height>573</height>
+    <width>1060</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -23,7 +23,7 @@
       <x>9</x>
       <y>9</y>
       <width>181</width>
-      <height>141</height>
+      <height>91</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayoutTransf">
@@ -36,7 +36,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>40</y>
+          <y>20</y>
           <width>95</width>
           <height>20</height>
          </rect>
@@ -52,7 +52,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>90</y>
+          <y>50</y>
           <width>95</width>
           <height>20</height>
          </rect>
@@ -69,25 +69,25 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>160</y>
+      <y>110</y>
       <width>181</width>
-      <height>201</height>
+      <height>191</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayoutTime">
+    <layout class="QGridLayout" name="gridLayoutSignalWindow">
      <item row="0" column="0">
-      <widget class="QGroupBox" name="groupBoxTime">
+      <widget class="QGroupBox" name="groupBoxSignalWindow">
        <property name="enabled">
         <bool>true</bool>
        </property>
        <property name="title">
-        <string>Time</string>
+        <string>Signal Window</string>
        </property>
        <widget class="QTimeEdit" name="timeEditStart">
         <property name="geometry">
          <rect>
           <x>60</x>
-          <y>60</y>
+          <y>50</y>
           <width>101</width>
           <height>22</height>
          </rect>
@@ -103,7 +103,7 @@
         <property name="geometry">
          <rect>
           <x>60</x>
-          <y>100</y>
+          <y>90</y>
           <width>101</width>
           <height>22</height>
          </rect>
@@ -112,11 +112,11 @@
          <string>mm:ss:zzz</string>
         </property>
        </widget>
-       <widget class="QLabel" name="labelStartTime">
+       <widget class="QLabel" name="labelStartSignalWindow">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>60</y>
+          <y>50</y>
           <width>41</width>
           <height>16</height>
          </rect>
@@ -125,11 +125,11 @@
          <string>Start :</string>
         </property>
        </widget>
-       <widget class="QLabel" name="labelStopTime">
+       <widget class="QLabel" name="labelStopSignalWindow">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>100</y>
+          <y>90</y>
           <width>41</width>
           <height>20</height>
          </rect>
@@ -142,7 +142,7 @@
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>130</y>
+          <y>120</y>
           <width>131</width>
           <height>16</height>
          </rect>
@@ -151,14 +151,14 @@
          <string>(Format : M:s:ms)</string>
         </property>
        </widget>
-       <widget class="QCheckBox" name="enableTime">
+       <widget class="QCheckBox" name="enableSignalWindow">
         <property name="enabled">
          <bool>true</bool>
         </property>
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>30</y>
+          <y>20</y>
           <width>81</width>
           <height>20</height>
          </rect>
@@ -171,7 +171,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>160</y>
+          <y>140</y>
           <width>179</width>
           <height>28</height>
          </rect>
@@ -187,10 +187,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>369</y>
+      <x>10</x>
+      <y>470</y>
       <width>181</width>
-      <height>151</height>
+      <height>121</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayoutAction">
@@ -225,8 +225,8 @@
      <rect>
       <x>200</x>
       <y>10</y>
-      <width>511</width>
-      <height>231</height>
+      <width>691</width>
+      <height>271</height>
      </rect>
     </property>
    </widget>
@@ -234,17 +234,17 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>250</y>
-      <width>511</width>
-      <height>231</height>
+      <y>290</y>
+      <width>691</width>
+      <height>261</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>720</x>
-      <y>10</y>
+      <x>900</x>
+      <y>0</y>
       <width>151</width>
       <height>231</height>
      </rect>
@@ -275,7 +275,7 @@
    <widget class="QWidget" name="gridLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>720</x>
+      <x>900</x>
       <y>250</y>
       <width>151</width>
       <height>231</height>
@@ -304,25 +304,12 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="labelVersion">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>490</y>
-      <width>141</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Version</string>
-    </property>
-   </widget>
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>490</y>
-      <width>511</width>
+      <y>560</y>
+      <width>701</width>
       <height>23</height>
      </rect>
     </property>
@@ -330,13 +317,110 @@
      <number>24</number>
     </property>
    </widget>
+   <widget class="QWidget" name="gridLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>310</y>
+      <width>181</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayoutCalcWindow">
+     <item row="0" column="0">
+      <widget class="QGroupBox" name="groupBoxCalcWindow">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="title">
+        <string>Calculation Window</string>
+       </property>
+       <widget class="QLabel" name="labelCalcWindow">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>41</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Size :</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="enableCalcWindow">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>20</y>
+          <width>81</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Enable</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="spinBoxCalcWindow">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>50</y>
+          <width>101</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelCalcWindow_2">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>80</y>
+          <width>71</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>(nb of ech)</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBoxCalcWindow">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>110</y>
+          <width>101</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelCalcWindow_3">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>110</y>
+          <width>61</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Type :</string>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>881</width>
+     <width>1060</width>
      <height>26</height>
     </rect>
    </property>

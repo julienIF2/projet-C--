@@ -16,6 +16,7 @@ public :
         QString fileType;
         long fileSize;
         long fileDuration;
+        long nbSample;
     };
     typedef struct fileInfoStruct fileInfoStruct;
 

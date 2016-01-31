@@ -9,18 +9,21 @@ void signalTXT::ReadInfo(const QString name,Signaux::fileInfoStruct *pFileInfo)
 {
     string type;
 
-    type = name.toStdString().substr(name.indexOf("."));
+    type = name.toStdString().substr(name.indexOf("."));  // Récupération du type
 
+    /* Mise à jour des informations */
     pFileInfo->fileName = QString::fromStdString(name.toStdString().substr(name.lastIndexOf("/")+1));
     pFileInfo->fileType = QString::fromStdString(type);
     pFileInfo->fileDuration =0; // durée inconnue
 
+    /* Calcul de la taille */
     ifstream file;
     file.open(name.toUtf8().constData());
-    long pos = file.tellg();
+    //long pos = file.tellg();
     file.seekg( 0 , std::ios_base::end ); // on se place à la fin du fichier
     pFileInfo->fileSize =file.tellg(); // la position fin = taille en octects
-    file.seekg( pos,  std::ios_base::beg ) ;
+    pFileInfo->nbSample =  pFileInfo->fileSize/2;
+    //file.seekg( pos,  std::ios_base::beg ) ;
     file.close();
 }
 
@@ -29,7 +32,7 @@ void signalTXT::ReadData(QString name,QVector<double>& dataX,QVector<double>& da
 {
     QFile file(name);
 
-    if (!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly)) // Lecture seule
     {
         qDebug() << "erreur ouverture fichier ReadData CSV";
     }
@@ -42,10 +45,11 @@ void signalTXT::ReadData(QString name,QVector<double>& dataX,QVector<double>& da
        dataX.clear();
        dataY.clear();
 
+       /* Récupération des données*/
        while (!in.atEnd())
        {
            temp = in.readLine();
-           tempList = temp.split(",");
+           tempList = temp.split(",");  // Divise au niveau du séparateur en 2 chaine de charactère
            dataX.push_back(QString(tempList[0]).toDouble());
            dataY.push_back(QString(tempList[1]).toDouble());
        }

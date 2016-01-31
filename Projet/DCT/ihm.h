@@ -11,7 +11,7 @@
 #include "signalcsv.h"
 #include "signalwav.h"
 #include "signaltxt.h"
-#include "dialog.h"
+
 
 using namespace std;
 
@@ -38,12 +38,10 @@ private :
 
     Transform DataCalc;
     Signaux *pDataSignal;
-    Dialog msgBox;
 
     void updateGraph(void);
-    void openDialogBox(QString title,QString txt);
 
-    void updateInSection(QString fileName,QString type,long duration,long size);
+    void updateInSection(QString fileName,QString type,long duration,long size,long nbSample);
     void updateOutSection(QString transformName,int time);
 
     void enableAllCmd(void);
@@ -53,12 +51,13 @@ private slots:
     void startClick(void);
     void clearClick(void);
     void focusClick(void);
-    void toogleBoxTime(void);
+    void toogleBoxSignalWindow(void);
+    void toogleBoxCalcWindow(void);
 
     void openFileClick(void);
     void saveFileClick(void);
 
-    void timeWindow(void);
+    void signalWindow(void);
 
     void aboutClick(void);
 

@@ -7,9 +7,7 @@ INPUT(
 ./debug\signalcsv.o
 ./debug\signaltxt.o
 ./debug\signalwav.o
-./debug\dialog.o
 ./debug\moc_ihm.o
 ./debug\moc_qcustomplot.o
 ./debug\moc_transform.o
-./debug\moc_dialog.o
 );

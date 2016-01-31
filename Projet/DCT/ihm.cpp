@@ -8,52 +8,62 @@ IHM::IHM(QWidget *parent) :
     ui->setupUi(this);
 
     /* Information générale */
-    ui->labelVersion->setText(QDate::currentDate().toString());
     this->setWindowTitle("Application DCT");
 
-    /* Zone Bouton */
+
+    /* Connection Bouton */
     connect(ui->pushButtonStart, SIGNAL(clicked(bool)), this, SLOT(startClick()));
     connect(ui->pushButtonClear,SIGNAL(clicked(bool)),this,SLOT(clearClick()));
     connect(ui->pushButtonFocus,SIGNAL(clicked(bool)),this,SLOT(focusClick()));
 
-    /* Zone Menu */
+    /* Connection Menu */
     connect(ui->actionOpen,SIGNAL(triggered(bool)),this,SLOT(openFileClick()));
     connect(ui->actionSave,SIGNAL(triggered(bool)),this,SLOT(saveFileClick()));
-
     connect(ui->actionAbout,SIGNAL(triggered(bool)),this,SLOT(aboutClick()));
 
+    /* Connection barre de progression */
     connect(&DataCalc,SIGNAL(progressionSignal(int)),this,SLOT(updateProgressBar(int)));
 
-    connect(ui->enableTime,SIGNAL(toggled(bool)),this,SLOT(toogleBoxTime()));
+    /* Connection modification signal */
+    connect(ui->enableSignalWindow,SIGNAL(toggled(bool)),this,SLOT(toogleBoxSignalWindow()));
+    connect(ui->enableCalcWindow,SIGNAL(toggled(bool)),this,SLOT(toogleBoxCalcWindow()));
+    connect(ui->pushButtonWindowing,SIGNAL(clicked(bool)), this, SLOT(signalWindow()));
 
-    connect(ui->pushButtonWindowing,SIGNAL(clicked(bool)), this, SLOT(timeWindow()));
 
-    /* Ajout des graph */
-    ui->graphCurve->addGraph();
+    /* Graph */
+    ui->graphCurve->addGraph();                         // ajout des graphs
     ui->graphTransf->addGraph();
-
-    /* Couleur des tracés */
-    ui->graphCurve->graph()->setPen(QPen(Qt::blue));
+    ui->graphCurve->graph()->setPen(QPen(Qt::blue));    // couleurs graphs
     ui->graphTransf->graph()->setPen(QPen(Qt::red));
-
-    /* Nom des labels */
-    ui->graphCurve->xAxis->setLabel("x");
+    ui->graphCurve->xAxis->setLabel("x");               // Labels des graphs
     ui->graphCurve->yAxis->setLabel("Signal d'entrée");
-
     ui->graphTransf->xAxis->setLabel("x");
     ui->graphTransf->yAxis->setLabel("Transformée");
 
-    ui->progressBar->setFormat("%p% effectué (%v sur %m)");
+    /* Barre de progression */
+    ui->progressBar->setFormat("%p% effectué (%v sur %m)"); // format barre de progression
     ui->progressBar->setValue(0);
 
-    ui->enableTime->setChecked(false);
+    /* Initialisation des items */
+    ui->enableSignalWindow->setChecked(false);
+    ui->enableCalcWindow->setChecked(false);
     ui->timeEditStart->setEnabled(false);
     ui->timeEditStop->setEnabled(false);
     ui->pushButtonWindowing->setEnabled(false);
+    ui->spinBoxCalcWindow->setEnabled(false);
+    ui->spinBoxCalcWindow->setMaximum(0);
+    ui->spinBoxCalcWindow->setMinimum(0);
+
+    /* Initialisation du choix des fenêtres */
+    QStringList windowList;
+    DataCalc.getWindowsType(windowList);                // Récupération des différentes fenêtres
+    ui->comboBoxCalcWindow->addItems(windowList);
+    ui->comboBoxCalcWindow->setEnabled(false);
 }
 
 IHM::~IHM()
 {
+    /* Désallocation de la mémoire */
     dataInX.clear();
     dataInY.clear();
     dataOutX.clear();
@@ -65,51 +75,30 @@ IHM::~IHM()
 
 void IHM::updateGraph(void)
 {
-    //updateInSection();
-    //updateOutSection(); 
-
-    ui->graphCurve->rescaleAxes(true);
+    ui->graphCurve->rescaleAxes(true);      //  Réajustement des axes activé
     ui->graphTransf->rescaleAxes(true);
 
-    ui->graphCurve->replot();
+    ui->graphCurve->replot();               // Affichage des graphs
     ui->graphTransf->replot();
 
-    ui->progressBar->setValue(0);
+    ui->progressBar->setValue(0);           // Reset de la barre de progression
     ui->progressBar->update();
 }
 
-
-void IHM::openDialogBox(QString title,QString txt)
-{
-    msgBox.setTitle(title);
-    msgBox.setInfo(txt);
-
-    msgBox.updateDialogBox();
-
-    /* On affiche la fênetre */
-    msgBox.show();
-
-    /* On empêche l'utilisateur d'agir sur la fenetre principale
-     * en forçant le focus sur la fenetre de dialog
-     * appui sur cancel/continue olbigatoire */
-    msgBox.setVisible(FALSE);
-
-    msgBox.exec();
-}
-
-void IHM::updateInSection(QString fileName,QString type,long duration,long size)
+void IHM::updateInSection(QString fileName,QString type,long duration,long size,long nbSample)
 {
     QString tmp;
     QString txt;
     QTime time(0,0);
 
-    ui->labelIn->clear();
+    ui->labelIn->clear();       // reset de l'affichage
 
-    qDebug() << duration;
-    time = time.addSecs(duration/1000);
+    //qDebug() << duration;
+
+    time = time.addSecs(duration/1000);     // calcul du temps
     time = time.addMSecs(duration%1000);
 
-    qDebug() << time.toString();
+    //qDebug() << time.toString();
 
     txt += "Name :\n";
     txt += fileName +"\n";
@@ -119,8 +108,10 @@ void IHM::updateInSection(QString fileName,QString type,long duration,long size)
     txt += time.toString("mm:ss:zzz")+"\n";
     txt += "Size :\n";
     txt += tmp.setNum(size/1000)+" ko"+"\n";
+    txt += "nb.Sample(s) :\n";
+    txt += tmp.setNum(nbSample)+"\n";
 
-    ui->labelIn->setText(txt);
+    ui->labelIn->setText(txt);          // chargement des informations du fichier
 }
 
 void IHM::updateOutSection(QString transformName,int time)
@@ -128,18 +119,19 @@ void IHM::updateOutSection(QString transformName,int time)
     QString tmp;
     QString txt;
 
-    ui->labelOut->clear();
+    ui->labelOut->clear();  // reset de l'affichage
 
     txt += "Operation :\n";
     txt += transformName+"\n";
     txt += "Calculation time :\n";
     txt += tmp.setNum(time)+" ms"+"\n";
 
-    ui->labelOut->setText(txt);
+    ui->labelOut->setText(txt);          // chargement des informations du fichier
 }
 
 void IHM::enableAllCmd(void)
 {
+    /* Réactivation de toutes les commandes */
     ui->pushButtonStart->setEnabled(true);
     ui->pushButtonFocus->setEnabled(true);
     ui->pushButtonClear->setEnabled(true);
@@ -147,11 +139,16 @@ void IHM::enableAllCmd(void)
     ui->menuBar->setEnabled(true);
     ui->menuBar->update();
 
-    ui->pushButtonWindowing->setEnabled(true);
+    if(ui->enableSignalWindow->isChecked())
+    {
+        ui->pushButtonWindowing->setEnabled(true);
+    }
 }
+
 
 void IHM::disableAllCmd(void)
 {
+    /* Désactivation de toutes les commandes */
     ui->pushButtonStart->setEnabled(false);
     ui->pushButtonFocus->setEnabled(false);
     ui->pushButtonClear->setEnabled(false);
@@ -168,30 +165,63 @@ void IHM::disableAllCmd(void)
 void IHM::startClick(void)
 {
     QTime tps;
-
+    QString windowType;
+    unsigned long windowSize;
+    /* Start du timer pour le tps de calcul */
     tps.start();
+
+    /* On désactive les actions de l'utilisateur */
     disableAllCmd();
+
+    /* Actualisation de la plage (barre de progression) */
     ui->progressBar->setRange(0, dataInX.size());
 
-    /* On démarre la transformée choisie */;
-    if(ui->radioButtonDCT->isChecked() == true)
+
+
+    /* Test du choix de fenêtrage */
+    windowSize =  ui->spinBoxCalcWindow->value();
+
+    if((ui->enableCalcWindow->isChecked()==TRUE) & (windowSize > 0)) // activé
     {
-        DataCalc.dctTransform(dataInX,dataInY,dataOutX,dataOutY);
+
+        windowType = ui->comboBoxCalcWindow->currentText();
+    }
+    else                                                             // désactivé
+    {
+        windowType = "\0";
+        windowSize = dataInX.size();
+    }
+
+
+    /* On exéctue la transformé choisie */
+    if(ui->radioButtonDCT->isChecked() == true) // DCT
+    {
+        DataCalc.dctTransform(dataInX,dataInY,dataOutX,dataOutY,windowType,windowSize);
         updateOutSection("DCT",tps.elapsed());
     }
-    else
+    else                                        // IDCT
     {
-        DataCalc.idctTransform(dataInX,dataInY,dataOutX,dataOutY);
+        DataCalc.idctTransform(dataInX,dataInY,dataOutX,dataOutY,windowType,windowSize);
         updateOutSection("IDCT",tps.elapsed());
     }
+
+
+    /* Chargement des résultats */
+    ui->graphCurve->graph(0)->setData(dataInX,dataInY); // data
+    ui->graphCurve->axisRect()->setupFullAxesBox(true);
+    ui->graphCurve->rescaleAxes(true); // ajustement auto des axes
+    ui->graphCurve->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom); // autorisation des zooms avec la souris/mollette
+
 
     ui->graphTransf->graph(0)->setData(dataOutX,dataOutY);
     ui->graphTransf->axisRect()->setupFullAxesBox(true);
     ui->graphTransf->rescaleAxes(true);
     ui->graphTransf->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
 
-    /* On actualise l'affichage */
+    /* Actualisation de l'affichage */
     updateGraph();
+
+    /* Réactivation des commandes */
     enableAllCmd();
 }
 
@@ -201,26 +231,26 @@ void IHM::clearClick(void)
     ui->graphCurve->graph(0)->clearData();
     ui->graphTransf->graph(0)->clearData();
 
-    /* Update */
+    /* Mise à jour graph */
     updateGraph();
 }
 
 void IHM::focusClick(void)
 {
-    /* Update */
+    /* Mise à jour graph */
     updateGraph();
 }
 
 
 void IHM::openFileClick(void)
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),"",tr("Texte (*.txt);;CSV(*.csv);;Son(*.wav)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),"",tr("CSV (*.csv);;Texte (*.txt);;Son (*.wav)"));
     string type;
     Signaux::fileInfoStruct info;
 
     if(fileName != "\0")
     {
-        type = fileName.toStdString().substr(fileName.indexOf("."));
+        type = fileName.toStdString().substr(fileName.indexOf(".")); //  récupère le type du fichier
 
         pDataSignal = NULL;
         if(type == ".csv")
@@ -241,20 +271,24 @@ void IHM::openFileClick(void)
         }
 
 
-        if(pDataSignal != NULL)
+        if(pDataSignal != NULL) // si pas d'erreur sur le fichier
         {
-            pDataSignal->ReadInfo(fileName,&info);
-            pDataSignal->ReadData(fileName,dataInX,dataInY);
-            delete[]pDataSignal;
-        }
-        updateInSection(info.fileName,info.fileType,info.fileDuration,info.fileSize);
-    }
+            pDataSignal->ReadInfo(fileName,&info);              // lecture des info
+            pDataSignal->ReadData(fileName,dataInX,dataInY);    // lecture des data
+            delete[]pDataSignal;                                // on dessalloue le pointeur
 
-    /* On affiche les résultats */
-    ui->graphCurve->graph(0)->setData(dataInX,dataInY); // data
-    ui->graphCurve->axisRect()->setupFullAxesBox(true);
-    ui->graphCurve->rescaleAxes(true); // ajustement auto des axes
-    ui->graphCurve->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom); // autorisation des zooms avec la souris/mollette
+            updateInSection(info.fileName,info.fileType,info.fileDuration,info.fileSize,info.nbSample); // mise à jour des info
+
+            ui->spinBoxCalcWindow->setMaximum(dataInX.size());  // Mise à jour de la range du fenêtrage
+            ui->spinBoxCalcWindow->setMinimum(0);
+
+            /* On affiche les résultats */
+            ui->graphCurve->graph(0)->setData(dataInX,dataInY); // data
+            ui->graphCurve->axisRect()->setupFullAxesBox(true);
+            ui->graphCurve->rescaleAxes(true); // ajustement auto des axes
+            ui->graphCurve->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom); // autorisation des zooms avec la souris/mollette
+        }
+    }
 
     /* Update */
     updateGraph();
@@ -268,7 +302,7 @@ void IHM::saveFileClick(void)
 
     if(fileName != "\0")
     {
-        type = fileName.toStdString().substr(fileName.indexOf("."));
+        type = fileName.toStdString().substr(fileName.indexOf(".")); //  récupère le type du fichier
 
         pDataSignal = NULL;
         if(type == ".csv")
@@ -299,9 +333,7 @@ void IHM::saveFileClick(void)
 
 void IHM::aboutClick(void)
 {
-    QString title,txt;
-
-    title = "Information";
+    QString txt;
 
     txt = "Application DCT/IDCT\n\n";
     txt += "écrite par :\n";
@@ -312,7 +344,7 @@ void IHM::aboutClick(void)
     txt += "\n";
     txt += "INSA GEA 2014-2017";
 
-    openDialogBox(title,txt);
+    QMessageBox::information(this,"Information",txt);
 }
 
 void IHM::updateProgressBar(int value)
@@ -321,9 +353,10 @@ void IHM::updateProgressBar(int value)
     ui->progressBar->update();
 }
 
-void IHM::toogleBoxTime(void)
+void IHM::toogleBoxSignalWindow(void)
 {
-    if(ui->enableTime->isChecked())
+    /* Activation/désactivation */
+    if(ui->enableSignalWindow->isChecked())
     {
         ui->timeEditStart->setEnabled(true);
         ui->timeEditStop->setEnabled(true);
@@ -337,7 +370,22 @@ void IHM::toogleBoxTime(void)
     }
 }
 
-void IHM::timeWindow(void)
+void IHM::toogleBoxCalcWindow(void)
+{
+    /* Activation/désactivation */
+    if(ui->enableCalcWindow->isChecked())
+    {
+        ui->spinBoxCalcWindow->setEnabled(true);
+        ui->comboBoxCalcWindow->setEnabled(true);
+    }
+    else
+    {
+        ui->spinBoxCalcWindow->setEnabled(false);
+    }
+}
+
+
+void IHM::signalWindow(void)
 {
     double deltaT;
     double startNum,stopNum;
@@ -346,9 +394,11 @@ void IHM::timeWindow(void)
     {
         deltaT = dataInX[2]-dataInX[1];
 
+        /* Récupération de la portion de signal */
         startNum = 60000*ui->timeEditStart->time().minute()+1000*ui->timeEditStart->time().second()+ui->timeEditStart->time().msec();
         stopNum = 60000*ui->timeEditStop->time().minute()+1000*ui->timeEditStop->time().second()+ui->timeEditStop->time().msec();
 
+        /* Conversion temps <-> numéro d'échantillion */
         startNum /= deltaT*1000;
         stopNum /= deltaT*1000;
 
@@ -356,21 +406,23 @@ void IHM::timeWindow(void)
         {
             long nbrToSupprBefore = startNum-1;
             long nbrToSupprAfter = dataInX.size()-stopNum;
-            qDebug() << nbrToSupprBefore;
-            qDebug() << nbrToSupprAfter;
-            qDebug() << dataInX.size();
+
+            /* On supprime les portions inutiles */
+            /* Portion supérieure */
             for(long i=1;i<nbrToSupprAfter;i++)
             {
                 dataInX.pop_back();
                 dataInY.pop_back();
             }
 
+            /* Portion inférieure */
             for(long i=0;i<nbrToSupprBefore;i++)
             {
                 dataInX.pop_front();
                 dataInY.pop_front();
             }
 
+            /* On met à jours les data */
             ui->graphCurve->graph(0)->setData(dataInX,dataInY); // data
             updateGraph();
         }
